@@ -1,0 +1,34 @@
+{
+  "risk_escalation_model": {
+    "best_model": "Ensemble (RF + XGBoost + Neural Network)",
+    "accuracy": 0.995,
+    "precision": 0.9975247524752475,
+    "recall": 0.9901719901719902,
+    "f1_score": 0.9938347718865598,
+    "roc_auc": 0.9995815223471209,
+    "training_samples": 4000,
+    "test_samples": 1000
+  },
+  "recommendation_system": {
+    "approach": "Hybrid (Collaborative + Content-Based Filtering)",
+    "precision_at_5": 0.14000000000000004,
+    "recall_at_5": 0.65,
+    "f1_score": 0.2303797468354431,
+    "num_users": 1000,
+    "num_resources": 50,
+    "num_interactions": 3011
+  },
+  "deployment": {
+    "saved_models": [
+      "risk_escalation_rf_model.pkl",
+      "risk_escalation_xgb_model.pkl",
+      "risk_escalation_nn_model.h5",
+      "risk_escalation_scaler.pkl",
+      "recommendation_user_similarity.pkl",
+      "recommendation_resource_similarity.pkl",
+      "recommendation_user_resource_matrix.pkl",
+      "recommendation_resources_df.pkl"
+    ],
+    "config_file": "model_config.json"
+  }
+}

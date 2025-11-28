@@ -1,0 +1,103 @@
+{
+  "questions": [
+    {
+      "id": "greeting",
+      "question": "Hello, I'm here to help you assess your safety. Everything we discuss is confidential. May I ask you some questions?",
+      "type": "yes_no",
+      "options": ["Yes, I need help", "Not right now"]
+    },
+    {
+      "id": "immediate_danger",
+      "question": "First, are you in immediate danger right now? If yes, please call 999 or use Emergency SOS.",
+      "type": "yes_no",
+      "options": ["Yes, I need help now", "No, I am safe for now"],
+      "critical": true
+    },
+    {
+      "id": "violence_frequency",
+      "question": "Has the physical violence been happening more often or getting worse over time?",
+      "type": "yes_no",
+      "options": ["Yes", "No", "There is no physical violence"]
+    },
+    {
+      "id": "threats",
+      "question": "Has your partner ever threatened to hurt or kill you?",
+      "type": "yes_no",
+      "options": ["Yes", "No"]
+    },
+    {
+      "id": "weapons",
+      "question": "Does your partner have access to any weapons like guns or knives?",
+      "type": "yes_no",
+      "options": ["Yes", "No", "I'm not sure"]
+    },
+    {
+      "id": "strangulation",
+      "question": "Has your partner ever tried to strangle or choke you? This is very serious and increases risk significantly.",
+      "type": "yes_no",
+      "options": ["Yes", "No"]
+    },
+    {
+      "id": "children",
+      "question": "Are there children involved? Have they been hurt or threatened?",
+      "type": "multiple_choice",
+      "options": ["Yes, children are at risk", "Children present but not harmed", "No children involved"]
+    },
+    {
+      "id": "fear_level",
+      "question": "How afraid are you of your partner on a daily basis?",
+      "type": "scale",
+      "options": ["Not afraid", "A little afraid", "Quite afraid", "Very afraid", "Terrified"]
+    },
+    {
+      "id": "isolation",
+      "question": "Does your partner try to control where you go, who you see, or who you talk to?",
+      "type": "yes_no",
+      "options": ["Yes, constantly", "Sometimes", "No"]
+    },
+    {
+      "id": "financial_control",
+      "question": "Does your partner control all the money or prevent you from working?",
+      "type": "yes_no",
+      "options": ["Yes", "Somewhat", "No"]
+    },
+    {
+      "id": "jealousy",
+      "question": "Is your partner extremely jealous or possessive?",
+      "type": "yes_no",
+      "options": ["Yes, very jealous", "Somewhat jealous", "No"]
+    },
+    {
+      "id": "substance_abuse",
+      "question": "Does your partner have problems with alcohol or drugs that make the situation worse?",
+      "type": "yes_no",
+      "options": ["Yes, frequently", "Sometimes", "No"]
+    },
+    {
+      "id": "recent_separation",
+      "question": "Have you recently separated or tried to leave? Or are you planning to?",
+      "type": "yes_no",
+      "options": ["Yes, I left or am planning to", "I tried but came back", "No"]
+    },
+    {
+      "id": "support",
+      "question": "Do you have somewhere safe you can go if you need to leave quickly?",
+      "type": "yes_no",
+      "options": ["Yes, I have a safe place", "Not sure", "No, nowhere to go"]
+    },
+    {
+      "id": "previous_help",
+      "question": "Have you reached out for help before (police, counselor, shelter)?",
+      "type": "yes_no",
+      "options": ["Yes", "No", "I wanted to but couldn't"]
+    },
+    {
+      "id": "next_steps",
+      "question": "Based on your answers, I can help you create a safety plan and connect you with resources. Would you like me to show you resources and next steps?",
+      "type": "yes_no",
+      "options": ["Yes, please help", "I need time to think"]
+    }
+  ],
+  "version": "1.0.0",
+  "total_questions": 16
+}
