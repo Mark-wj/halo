@@ -1,0 +1,50 @@
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# ── Virtual environment ───────────────────────────────────────────────────────
+venv/
+env/
+.venv/
+
+# ── Environment / secrets ─────────────────────────────────────────────────────
+.env
+.env.*
+config.local.py
+secrets.py
+
+# ── Logs ──────────────────────────────────────────────────────────────────────
+logs/
+*.log
+halo_backend.log
+
+# ── ML models (use Git LFS instead) ──────────────────────────────────────────
+models/**/*.pkl
+models/**/*.h5
+models/**/*.joblib
+models/**/*.bin
+models/**/*.pt
+models/**/*.onnx
+
+# Keep the models/ folder structure and any JSON configs
+!models/**/.gitkeep
+!models/**/config.json
+
+# ── Test artifacts ────────────────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
+tests/__pycache__/
+
+# ── OS ────────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── IDE ───────────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
