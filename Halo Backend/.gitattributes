@@ -1,3 +1,5 @@
 Halo[[:space:]]Backend/models/**/*.pkl filter=lfs diff=lfs merge=lfs -text
 Halo[[:space:]]Backend/models/**/*.h5 filter=lfs diff=lfs merge=lfs -text
 Halo[[:space:]]Backend/models/**/*.json filter=lfs diff=lfs merge=lfs -text
+models/**/*.pkl filter=lfs diff=lfs merge=lfs -text
+models/**/*.h5 filter=lfs diff=lfs merge=lfs -text

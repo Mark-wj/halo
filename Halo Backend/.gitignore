@@ -21,14 +21,6 @@ logs/
 *.log
 halo_backend.log
 
-# ── ML models (use Git LFS instead) ──────────────────────────────────────────
-models/**/*.pkl
-models/**/*.h5
-models/**/*.joblib
-models/**/*.bin
-models/**/*.pt
-models/**/*.onnx
-
 # Keep the models/ folder structure and any JSON configs
 !models/**/.gitkeep
 !models/**/config.json
