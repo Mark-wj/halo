@@ -1,3 +1,18 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:a6d778339baef001059220bbf4286c856a3aa23cfb6085454e3eb6e2ec2a7a8f
-size 862
+{
+  "sources": [
+    "Danger Assessment (DA) - Campbell et al., Johns Hopkins University",
+    "ODARA - Ontario Domestic Assault Risk Assessment",
+    "DVSI-R - Domestic Violence Screening Instrument-Revised",
+    "WHO Multi-country Study on Women's Health and Domestic Violence",
+    "CDC National Intimate Partner and Sexual Violence Survey (NISVS)"
+  ],
+  "key_findings": {
+    "strangulation": "Single strongest predictor of homicide (Campbell et al., 2003)",
+    "weapon_access": "Increases lethality risk by 5x (Campbell et al., 2003)",
+    "recent_separation": "Separation assault is extremely high risk (Block, 2003)",
+    "forced_sex": "Strong predictor of severe violence (Campbell & Soeken, 1999)",
+    "escalation": "Violence pattern is critical indicator (Dutton & Kropp, 2000)"
+  },
+  "n_samples": 15000,
+  "created": "2026-02-09T07:22:38.244416"
+}

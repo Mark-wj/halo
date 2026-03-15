@@ -1,3 +1,37 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:8298c1391b2e083dabdf1b9a5653bab4e2afce87b2a48efbc67380aeb835e0a1
-size 872
+{
+  "data_source": "Kenya DHS 2022 (16,926 rows) + Synthetic supplement (5,000 rows)",
+  "weights": {
+    "rf": 0.2499911601717604,
+    "xgb": 0.25021149161320017,
+    "lgbm": 0.25021285420714845,
+    "nn": 0.24958449400789093
+  },
+  "features": [
+    "strangulation",
+    "death_threats",
+    "weapon_access",
+    "attempted_homicide",
+    "children_harmed",
+    "recent_separation",
+    "substance_abuse",
+    "severe_alcohol",
+    "sexual_violence",
+    "control_jealousy",
+    "fear_level",
+    "escalating_violence",
+    "no_safe_place",
+    "external_violence",
+    "perp_mental_health",
+    "economic_control",
+    "prior_police",
+    "risk_score",
+    "days_since_last_incident",
+    "incident_frequency",
+    "score_change_trend",
+    "previous_incidents"
+  ],
+  "performance": {
+    "ensemble_auc": 0.9991591891644789,
+    "ensemble_f1": 0.9722703639514731
+  }
+}

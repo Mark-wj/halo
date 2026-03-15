@@ -1,3 +1,32 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:761caff51762ddc1e622cdb803c7b696254e9117756ff8bbac9f326efc38c020
-size 467
+{
+  "classes": [
+    "CRITICAL",
+    "HIGH_DISTRESS",
+    "LOW",
+    "MODERATE",
+    "SAFE"
+  ],
+  "crisis_keywords": [
+    "kill",
+    "die",
+    "suicide",
+    "gun",
+    "weapon",
+    "knife",
+    "strangle",
+    "choke",
+    "murder",
+    "death",
+    "end it all"
+  ],
+  "performance": {
+    "lr_accuracy": 1.0,
+    "cnn_accuracy": 1.0
+  },
+  "multimodal": {
+    "text": true,
+    "image": true,
+    "audio": true
+  },
+  "created": "2026-02-09T07:29:02.958772"
+}

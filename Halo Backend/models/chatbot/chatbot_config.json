@@ -1,3 +1,61 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:5c548105a966b46dfcce1f74de6804ee3764384346e82649b141da6bd0a305dd
-size 1438
+{
+  "version": "2.0.0",
+  "questions": [
+    {
+      "id": "greeting",
+      "text": "Hello, I'm here to help you assess your safety. Everything is confidential. May I ask you some questions?",
+      "type": "yes_no",
+      "options": [
+        "Yes, I need help",
+        "Not right now"
+      ],
+      "weight": 0
+    },
+    {
+      "id": "immediate_danger",
+      "text": "Are you in immediate danger right now?",
+      "type": "yes_no",
+      "options": [
+        "Yes, I need help now",
+        "No, I am safe right now"
+      ],
+      "weight": 10,
+      "critical": true
+    },
+    {
+      "id": "physical_violence",
+      "text": "Has there been physical violence?",
+      "type": "yes_no",
+      "options": [
+        "Yes",
+        "No",
+        "Prefer not to answer"
+      ],
+      "weight": 4
+    },
+    {
+      "id": "strangulation",
+      "text": "Has your partner ever tried to strangle or choke you?",
+      "type": "yes_no",
+      "options": [
+        "Yes",
+        "No"
+      ],
+      "weight": 5,
+      "critical": true
+    }
+  ],
+  "empathetic_responses": {
+    "greeting": "Thank you for trusting me.",
+    "immediate_danger": "Your safety is my priority.",
+    "physical_violence": "I'm sorry you're experiencing this.",
+    "strangulation": "This is very serious. I'm glad you're telling me."
+  },
+  "risk_thresholds": {
+    "CRITICAL": 20,
+    "HIGH": 15,
+    "MODERATE": 10,
+    "LOW": 5
+  },
+  "max_score": 47
+}

@@ -1,3 +1,167 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:a01901957095811d1b092626a8a27b146208588b3ae424f4da7206e5db6c75ec
-size 5188
+{
+  "weights": {
+    "random_forest": 0.25025435469719753,
+    "xgboost": 0.2504662621034008,
+    "lightgbm": 0.2504811351076871,
+    "neural_network": 0.24879824809171455
+  },
+  "features": [
+    "strangulation",
+    "death_threats",
+    "weapon_access",
+    "children_harmed",
+    "recent_separation",
+    "substance_abuse",
+    "control_jealousy",
+    "fear_level",
+    "escalating_violence",
+    "no_safe_place",
+    "forced_sex",
+    "risk_score",
+    "days_since_last_incident",
+    "incident_frequency",
+    "score_change_trend",
+    "previous_incidents"
+  ],
+  "feature_importance": [
+    {
+      "feature": "risk_score",
+      "rf_importance": 0.35625929233764,
+      "xgb_importance": 0.19493986666202545,
+      "lgbm_importance": 1563,
+      "avg_importance": 521.1837330529999
+    },
+    {
+      "feature": "score_change_trend",
+      "rf_importance": 0.15726581979341567,
+      "xgb_importance": 0.025573614984750748,
+      "lgbm_importance": 1512,
+      "avg_importance": 504.0609464782594
+    },
+    {
+      "feature": "days_since_last_incident",
+      "rf_importance": 0.026463593786362018,
+      "xgb_importance": 0.013448281213641167,
+      "lgbm_importance": 1326,
+      "avg_importance": 442.0133039583333
+    },
+    {
+      "feature": "incident_frequency",
+      "rf_importance": 0.10107408814028714,
+      "xgb_importance": 0.012156466022133827,
+      "lgbm_importance": 775,
+      "avg_importance": 258.3710768513875
+    },
+    {
+      "feature": "previous_incidents",
+      "rf_importance": 0.0242468251041241,
+      "xgb_importance": 0.005338562186807394,
+      "lgbm_importance": 627,
+      "avg_importance": 209.00986179576364
+    },
+    {
+      "feature": "fear_level",
+      "rf_importance": 0.007022002160171854,
+      "xgb_importance": 0.017973219975829124,
+      "lgbm_importance": 484,
+      "avg_importance": 161.34166507404532
+    },
+    {
+      "feature": "control_jealousy",
+      "rf_importance": 0.006800829999437283,
+      "xgb_importance": 0.01968904584646225,
+      "lgbm_importance": 413,
+      "avg_importance": 137.67549662528197
+    },
+    {
+      "feature": "recent_separation",
+      "rf_importance": 0.04073397237025988,
+      "xgb_importance": 0.050003524869680405,
+      "lgbm_importance": 362,
+      "avg_importance": 120.69691249907999
+    },
+    {
+      "feature": "weapon_access",
+      "rf_importance": 0.031683115744202794,
+      "xgb_importance": 0.036364905536174774,
+      "lgbm_importance": 340,
+      "avg_importance": 113.35601600709346
+    },
+    {
+      "feature": "strangulation",
+      "rf_importance": 0.047883808787549595,
+      "xgb_importance": 0.06853857636451721,
+      "lgbm_importance": 321,
+      "avg_importance": 107.03880746171735
+    },
+    {
+      "feature": "forced_sex",
+      "rf_importance": 0.01603202359601851,
+      "xgb_importance": 0.02888636291027069,
+      "lgbm_importance": 310,
+      "avg_importance": 103.34830612883543
+    },
+    {
+      "feature": "death_threats",
+      "rf_importance": 0.05973153637074219,
+      "xgb_importance": 0.044830773025751114,
+      "lgbm_importance": 306,
+      "avg_importance": 102.03485410313216
+    },
+    {
+      "feature": "children_harmed",
+      "rf_importance": 0.006948673047932353,
+      "xgb_importance": 0.021128861233592033,
+      "lgbm_importance": 229,
+      "avg_importance": 76.34269251142717
+    },
+    {
+      "feature": "escalating_violence",
+      "rf_importance": 0.11270251790803688,
+      "xgb_importance": 0.4442395865917206,
+      "lgbm_importance": 153,
+      "avg_importance": 51.18564736816659
+    },
+    {
+      "feature": "substance_abuse",
+      "rf_importance": 0.002847301557827385,
+      "xgb_importance": 0.006578069645911455,
+      "lgbm_importance": 144,
+      "avg_importance": 48.00314179040125
+    },
+    {
+      "feature": "no_safe_place",
+      "rf_importance": 0.002304599295992302,
+      "xgb_importance": 0.010310214944183826,
+      "lgbm_importance": 135,
+      "avg_importance": 45.00420493808006
+    }
+  ],
+  "performance": {
+    "ensemble_auc": 0.9971181087916552,
+    "ensemble_f1": 0.9797199420569773,
+    "rf_auc": 0.9966306299222918,
+    "xgb_auc": 0.9974745449542005,
+    "lgbm_auc": 0.9975337762576824,
+    "nn_auc": 0.9908317280601747
+  },
+  "dataset_metadata": {
+    "sources": [
+      "Danger Assessment (DA) - Campbell et al., Johns Hopkins University",
+      "ODARA - Ontario Domestic Assault Risk Assessment",
+      "DVSI-R - Domestic Violence Screening Instrument-Revised",
+      "WHO Multi-country Study on Women's Health and Domestic Violence",
+      "CDC National Intimate Partner and Sexual Violence Survey (NISVS)"
+    ],
+    "key_findings": {
+      "strangulation": "Single strongest predictor of homicide (Campbell et al., 2003)",
+      "weapon_access": "Increases lethality risk by 5x (Campbell et al., 2003)",
+      "recent_separation": "Separation assault is extremely high risk (Block, 2003)",
+      "forced_sex": "Strong predictor of severe violence (Campbell & Soeken, 1999)",
+      "escalation": "Violence pattern is critical indicator (Dutton & Kropp, 2000)"
+    },
+    "n_samples": 15000,
+    "created": "2026-02-09T07:22:38.244416"
+  },
+  "created": "2026-02-09T07:23:07.717499"
+}
