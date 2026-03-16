@@ -30,7 +30,7 @@ ALLOWED_ORIGINS = [
     "https://halo001.vercel.app",          # permanent production URL
     "https://haloai-blush.vercel.app",     # previous deployment
     "https://halov10.vercel.app",          # previous deployment
-    "https://halo1.vercel.app/",
+    "https://halo1.vercel.app",
 ]
 
 # Add any extra origin from env var (useful for custom domains later)
