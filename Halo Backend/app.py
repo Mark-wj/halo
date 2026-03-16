@@ -1,6 +1,5 @@
 """
-app.py  —  production entry point
-Swap to lazy ML loading when running on free-tier cloud (LAZY_LOAD_MODELS=true)
+app.py — production entry point
 """
 import os
 import logging
@@ -11,7 +10,6 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# ── choose ML service based on environment ────────────────────────────────────
 if os.getenv("LAZY_LOAD_MODELS", "false").lower() == "true":
     logger.info("Using lazy-load ML service (free-tier mode)")
     from services.ml_service_lazy import MLService
@@ -23,26 +21,60 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 
-
+# ── CORS ──────────────────────────────────────────────────────────────────────
+# Hardcode all known frontend origins.
+# Add new Vercel URLs here if the project ever gets redeployed under a new name.
 ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://localhost:3000",
-    os.getenv("FRONTEND_URL", "https://halo-guardian-network.vercel.app"),
+    "https://halo001.vercel.app",          # permanent production URL
+    "https://haloai-blush.vercel.app",     # previous deployment
+    "https://halov10.vercel.app",          # previous deployment
+    "https://halo1.vercel.app/",
 ]
+
+# Add any extra origin from env var (useful for custom domains later)
+extra = os.getenv("FRONTEND_URL", "").strip()
+if extra and extra not in ALLOWED_ORIGINS:
+    ALLOWED_ORIGINS.append(extra)
 
 CORS(app, resources={r"/*": {"origins": ALLOWED_ORIGINS}}, supports_credentials=True)
 
-# ── log every request/response ───────────────────────────────────────────────
+
+# ── Manual preflight handler — belt-and-suspenders over flask-cors ────────────
 @app.before_request
-def log_request():
-    logger.info(f"{request.method} {request.path} - {request.remote_addr}")
+def handle_preflight():
+    if request.method == "OPTIONS":
+        origin = request.headers.get("Origin", "")
+        if origin in ALLOWED_ORIGINS:
+            resp = app.make_default_options_response()
+            resp.headers["Access-Control-Allow-Origin"] = origin
+            resp.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+            resp.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
+            resp.headers["Access-Control-Allow-Credentials"] = "true"
+            resp.headers["Access-Control-Max-Age"] = "3600"
+            return resp
+
 
 @app.after_request
-def log_response(response):
+def add_cors_headers(response):
+    origin = request.headers.get("Origin", "")
+    if origin in ALLOWED_ORIGINS:
+        response.headers["Access-Control-Allow-Origin"] = origin
+        response.headers["Access-Control-Allow-Credentials"] = "true"
+        response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
+        response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
     logger.info(f"Response: {response.status_code}")
     return response
 
-# ── initialise ML service ─────────────────────────────────────────────────────
+
+@app.before_request
+def log_request():
+    if request.method != "OPTIONS":
+        logger.info(f"{request.method} {request.path} - {request.remote_addr}")
+
+
+# ── ML service ────────────────────────────────────────────────────────────────
 logger.info("🚀 Initializing HALO Backend...")
 try:
     ml_service = MLService()
@@ -51,7 +83,8 @@ except Exception as e:
     logger.error(f"❌ ML Service failed to initialize: {e}")
     ml_service = None
 
-# ── routes ────────────────────────────────────────────────────────────────────
+
+# ── Routes ────────────────────────────────────────────────────────────────────
 
 @app.route("/health", methods=["GET", "OPTIONS"])
 def health():
@@ -64,13 +97,10 @@ def health():
 
 @app.route("/api/predict-escalation", methods=["POST", "OPTIONS"])
 def predict_escalation():
-    if request.method == "OPTIONS":
-        return jsonify({}), 200
     if not ml_service:
         return jsonify({"success": False, "error": "ML service unavailable"}), 503
     try:
-        data = request.get_json()
-        result = ml_service.predict_escalation(data)
+        result = ml_service.predict_escalation(request.get_json())
         return jsonify(result)
     except Exception as e:
         logger.error(f"predict_escalation error: {e}", exc_info=True)
@@ -79,13 +109,10 @@ def predict_escalation():
 
 @app.route("/api/analyze-sentiment", methods=["POST", "OPTIONS"])
 def analyze_sentiment():
-    if request.method == "OPTIONS":
-        return jsonify({}), 200
     if not ml_service:
         return jsonify({"success": False, "error": "ML service unavailable"}), 503
     try:
-        data = request.get_json()
-        result = ml_service.analyze_sentiment(data.get("text", ""))
+        result = ml_service.analyze_sentiment(request.get_json().get("text", ""))
         return jsonify(result)
     except Exception as e:
         logger.error(f"analyze_sentiment error: {e}", exc_info=True)
@@ -94,13 +121,10 @@ def analyze_sentiment():
 
 @app.route("/api/analyze-journal", methods=["POST", "OPTIONS"])
 def analyze_journal():
-    if request.method == "OPTIONS":
-        return jsonify({}), 200
     if not ml_service:
         return jsonify({"success": False, "error": "ML service unavailable"}), 503
     try:
-        data = request.get_json()
-        result = ml_service.analyze_journal_entry(data.get("text", ""))
+        result = ml_service.analyze_journal_entry(request.get_json().get("text", ""))
         return jsonify(result)
     except Exception as e:
         logger.error(f"analyze_journal error: {e}", exc_info=True)
@@ -109,8 +133,6 @@ def analyze_journal():
 
 @app.route("/api/recommend-resources", methods=["POST", "OPTIONS"])
 def recommend_resources():
-    if request.method == "OPTIONS":
-        return jsonify({}), 200
     if not ml_service:
         return jsonify({"success": False, "error": "ML service unavailable"}), 503
     try:
@@ -124,13 +146,10 @@ def recommend_resources():
 
 @app.route("/api/analyze-trend", methods=["POST", "OPTIONS"])
 def analyze_trend():
-    if request.method == "OPTIONS":
-        return jsonify({}), 200
     if not ml_service:
         return jsonify({"success": False, "error": "ML service unavailable"}), 503
     try:
-        data = request.get_json()
-        result = ml_service.analyze_trend(data.get("assessments", []))
+        result = ml_service.analyze_trend(request.get_json().get("assessments", []))
         return jsonify(result)
     except Exception as e:
         logger.error(f"analyze_trend error: {e}", exc_info=True)
@@ -139,13 +158,10 @@ def analyze_trend():
 
 @app.route("/api/chatbot/start", methods=["POST", "OPTIONS"])
 def chatbot_start():
-    if request.method == "OPTIONS":
-        return jsonify({}), 200
     if not ml_service:
         return jsonify({"success": False, "error": "ML service unavailable"}), 503
     try:
-        result = ml_service.start_chatbot_session()
-        return jsonify(result)
+        return jsonify(ml_service.start_chatbot_session())
     except Exception as e:
         logger.error(f"chatbot_start error: {e}", exc_info=True)
         return jsonify({"success": False, "error": str(e)}), 500
@@ -153,8 +169,6 @@ def chatbot_start():
 
 @app.route("/api/chatbot/respond", methods=["POST", "OPTIONS"])
 def chatbot_respond():
-    if request.method == "OPTIONS":
-        return jsonify({}), 200
     if not ml_service:
         return jsonify({"success": False, "error": "ML service unavailable"}), 503
     try:
@@ -172,23 +186,18 @@ def chatbot_respond():
 
 @app.route("/api/analyze-evidence", methods=["POST", "OPTIONS"])
 def analyze_evidence():
-    if request.method == "OPTIONS":
-        return jsonify({}), 200
     if not ml_service:
         return jsonify({"success": False, "error": "ML service unavailable"}), 503
     try:
-        data = request.get_json()
-        result = ml_service.analyze_evidence_collection(data.get("evidence", []))
+        result = ml_service.analyze_evidence_collection(request.get_json().get("evidence", []))
         return jsonify(result)
     except Exception as e:
         logger.error(f"analyze_evidence error: {e}", exc_info=True)
         return jsonify({"success": False, "error": str(e)}), 500
 
 
-# ── entrypoint ────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))
     debug = os.getenv("FLASK_ENV") != "production"
     logger.info(f"🚀 Starting HALO Backend on port {port}")
-    logger.info(f"🔧 Debug mode: {debug}")
     app.run(host="0.0.0.0", port=port, debug=debug)
